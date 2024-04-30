@@ -346,6 +346,7 @@ void window_keypress_handler(GtkWidget *widget, GdkEventKey *event,
     return;
   }
   if (event->state & GDK_CONTROL_MASK) {
+    // todo: match by `event->hardware_keycode`
     switch (event->keyval) {
       // todo: check whether button `c` was pressed on any layout (?)
       case 1747:  // 1747 is a keycode for letter `c` in Ukrainian layout
@@ -361,10 +362,12 @@ void window_keypress_handler(GtkWidget *widget, GdkEventKey *event,
       case GDK_KEY_w:
         gtk_main_quit();
         break;
+      case 1745:  // `я` <-> `z`
       case GDK_KEY_z:
         action_undo(state);
         break;
       case GDK_KEY_Z:
+      // case 1744:  // `я` <-> `z`
       case GDK_KEY_y:
         action_redo(state);
         break;
